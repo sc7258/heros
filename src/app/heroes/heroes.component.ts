@@ -28,16 +28,29 @@ export class HeroesComponent implements OnInit {
     this.getHeroes();
   }
 
-  onSelect(hero: Hero) {
-    this.selectedHero = hero;
-    this.messageService.add(`HeroesComponent: Selected hero id=${hero.id}`);
-  }
+  // onSelect(hero: Hero) {
+  //   this.selectedHero = hero;
+  //   this.messageService.add(`HeroesComponent: Selected hero id=${hero.id}`);
+  // }
 
   getHeroes(): void {
     //this.heroes = this.heroService.getHeroes();
 
     this.heroService.getHeroes()
       .subscribe(t => this.heroes = t);
+  }
 
+  add(name: string): void {
+    name = name.trim();
+    if (!name) { return; }
+
+    this.heroService.addHero({ name } as Hero)
+      .subscribe(t => this.heroes.push(t));
+    ;
+  }
+
+  deleteHero(id: number) {
+    this.heroService.deleteHero(id)
+      .subscribe( (_: any) => this.heroes = this.heroes.filter(t => t.id != id));
   }
 }

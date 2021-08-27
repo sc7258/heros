@@ -1,5 +1,6 @@
 import { Hero } from './hero';
 
+// deprecated by im-memory-data
 export const HEROES: Hero[] = [
   { id: 11, name: 'Dr Nice' },
   { id: 12, name: 'Narco' },
